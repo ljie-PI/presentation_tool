@@ -1,0 +1,12 @@
+#content {
+    background-color: #FFFFFF;
+    width: 800px;
+    height: 580px;
+    overflow-x: auto;
+    overflow-y: auto;
+    clear: left;
+}
+
+#slides {
+    margin: 0px 10px;
+}

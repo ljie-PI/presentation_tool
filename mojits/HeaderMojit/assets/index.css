@@ -1,0 +1,64 @@
+#header {
+    background-color: #FFFFFF;
+    height: 20px;
+    line-height: 18px;
+    width: 800px;
+    border-bottom: 1px solid #400040;
+    text-align: center;
+}
+
+.header-text {
+    background-color: #400040;
+    border: 1px solid #FFFFFF;
+    color: #FFFFFF;
+    font-size: 14px;
+    height: 20px;
+    line-height: 14px;
+    padding:1px 3px;
+    vertical-align: middle;
+    cursor: pointer;
+}
+
+#prev-slide {
+    float: left;
+    margin-left: 10px;
+}
+
+#next-slide {
+    float: right;
+    margin-right: 10px;
+}
+
+#slide-title {
+    margin: 0 auto;
+}
+
+#menu-list {
+    background-color: #FFFFFF;
+    width: 400px;
+    max-height: 400px;
+    z-index: 10;
+    overflow: auto;
+    text-align: center;
+    margin: 0px;
+    padding: 0px;
+    position: absolute;
+    left: 200px;
+    list-style: none;
+    border: 1px solid #400040;
+}
+
+.item-node {
+    font-size: 14px;
+    background-color: #400040;
+    color: #FFFFFF;
+    height: 18px;
+    width: 398px;
+    border: 1px solid #FFFFFF;
+    cursor: pointer;
+}
+
+.highlight {
+    background-color: #FFFFFF;
+    color: #400040;
+}

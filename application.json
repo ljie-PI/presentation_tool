@@ -1,0 +1,49 @@
+[
+    {
+        "settings": [ "master" ],
+        "specs": {
+            "home": {
+                "type": "HTMLFrameMojit",
+                "config": {
+                    "deploy":true,
+                    "child": {
+                        "type": "HomePageMojit",
+                        "config": {
+                            "children": {
+                                "header": {
+                                    "type": "HeaderMojit"
+                                },
+                                "content": {
+                                    "type": "ContentMojit"
+                                }
+                            }
+                        }
+                    }
+                },
+                "assets": {
+                    "css": [
+                        "/assets/css/home.css"
+                    ]
+                }
+            },
+            "readslides": {
+                "type": "ReadSlidesMojit"
+            },
+            "header": {
+                "type": "HTMLFrameMojit",
+                "config": {
+                    "deploy": "true",
+                    "child": {
+                        "type": "HeaderMojit"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "settings": [ "environment:development" ],
+        "staticHandling": {
+            "forceUpdate": true
+        }
+    }
+]
