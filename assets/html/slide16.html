@@ -1,0 +1,67 @@
+<h3> Code example: Use multiple mojits </h3>
+<ul>
+    <li> Path: mojits/HomePageMojit/view/index.hb.html <br/>
+        <pre>
+&lt;div id="{{mojit_view_id}}"&gt;
+    {{{header}}}
+    {{{content}}}
+&lt;/div&gt;
+        </pre>
+    </li>
+    <li> Path: application.json <br/>
+        <pre>
+[{
+    "settings": [ "master" ],
+    "specs": {
+        <font color="red">
+        "home": {
+            "type": "HTMLFrameMojit",
+            "config": {
+                "deploy":true,
+                "child": {
+                    "type": "HomePageMojit",
+                    "config": {
+                        "children": {
+                            "header": {
+                                "type": "HeaderMojit"
+                            },
+                            "content": {
+                                "type": "ContentMojit"
+                            }
+                        }
+                    }
+                }
+            },
+            "assets": {
+                "css": [
+                    "/assets/css/home.css"
+                ]
+            }
+        },
+        </font>
+        "readslides": {
+            "type": "ReadSlidesMojit"
+        },
+        "header": {
+            "type": "HTMLFrameMojit",
+            "config": {
+                "deploy": "true",
+                "child": {
+                    "type": "HeaderMojit"
+                }
+            }
+        }
+    }
+},
+{
+    "settings": [ "environment:development" ],
+    "staticHandling": {
+        "forceUpdate": true
+    }
+}]
+
+
+
+        </pre>
+    </li>
+</ul>

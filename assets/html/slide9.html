@@ -1,0 +1,51 @@
+<h3> Code example: Binder </h3>
+<strong> Path: mojit/HeaderMojit/binders/index.js </strong>
+<pre>
+YUI.add('HeaderMojitBinderIndex', function(Y, NAME) {
+    Y.namespace('mojito.binders')[NAME] = {
+
+        init: function (mojitProxy) {
+            this.mojitProxy = mojitProxy;
+        },
+    
+        bind: function (node) {
+            this.node = node;
+            var me = this;
+            me.slideIdx = 1;
+            me.menuList = me.mojitProxy.config.menuList;
+            me.slideCount = me.menuList.length;
+            me.buildMenuList();
+            Y.log("me.menuList is " + Y.JSON.stringify(me.menuList));
+            Y.log("me.slideIdx is " + Y.JSON.stringify(me.slideIdx));
+            Y.log("me.slideCount is " + Y.JSON.stringify(me.slideCount));
+            this.node.one("#slide-title").on("click", me.clickSlideTitle, this);
+            this.node.one("#menu-list").delegate("mouseover", me.itemNodeHover, ".item-node", me);
+            this.node.one("#menu-list").delegate("click", me.itemNodeSelect, ".item-node", me);
+            this.node.one("#prev-slide").on("click", me.clickPrevSlide, this);
+            this.node.one("#next-slide").on("click", me.clickNextSlide, this); 
+            // using Plugin here to present how to use YUI plugin
+            this.node.plug(Y.Plugin.KeyboardAction, { 
+                menuList: me.menuList,
+                slideIdx: me.slideIdx,
+                slideCount: me.slideCount,
+                titleNode: this.node.one("#slide-title"),
+                callback: function (idx) {
+                    me.slideIdx = idx;
+                    me.mojitProxy.broadcast('slidechange', {slideIdx: me.slideIdx});
+                }
+            });
+            Y.on("keyup", this.node.keyaction.onKeyUp, "body", this.node.keyaction);
+        },
+        
+        // other functions
+        ......
+
+}, '0.0.1', {requires: ['event-mouseenter',
+                        'mojito-client',
+                        'node',
+                        'keyboard-action',
+                        'event-key']});
+
+
+
+</pre>

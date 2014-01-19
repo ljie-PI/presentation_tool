@@ -1,0 +1,32 @@
+<h3> Code example: Assets </h3>
+<ul>
+    <li> 
+        Global assets <br/>
+        <ul>
+            <li> Path: assets/css/home.css (content ignored) </li>
+            <li> Path: application.json <br/>
+                <pre>
+"assets": {
+    "css": [
+        "/assets/css/home.css"
+    ]
+}
+                </pre>
+            </li>
+            <li> Path: mojit/HomePageMojit/views/index.hb.html <br/>
+                <pre>
+&lt;link rel="stylesheet" type="text/css" href="/static/mojito_kt/assets/css/home.css" /&gt;
+                </pre>
+            </li>
+        </ul>
+    </li>
+    <li> Mojit assets </li>
+    <ul>
+        <li> Path: mojit/HeaderMojit/assets/index.css (content ignored) </li>
+        <li> Path: mojit/HeaderMojit/controller.server.js </br>
+            <pre>
+ac.assets.addCss('./index.css');
+            </pre>
+        </li>
+    </ul>
+</ul>

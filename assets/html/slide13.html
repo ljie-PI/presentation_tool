@@ -1,0 +1,36 @@
+<h3> Code example: Use addons </h3>
+<strong> Path: mojit/ReadSlidesMojit </strong>
+<pre>
+YUI.add('ReadSlidesMojit', function(Y, NAME) {
+
+    Y.namespace('mojito.controllers')[NAME] = {
+
+        init: function(config) {
+            this.config = config;
+        },
+
+        index: function(ac) {
+            ac.assets.addCss('./index.css');
+        
+            var slideNum = ac.params.getFromMerged("n");
+            if (typeof slideNum === "undefined") {
+                slideNum = 1;
+            }
+            <font color="red">
+            ac.readSlides.getSlide(slideNum, function (retObj) {
+                if (typeof retObj.error !== "undefined") {
+                    ac.error(retObj.error);
+                } else {
+                    ac.done(retObj.slide);
+                }
+            });
+            </font>
+        }
+
+    };
+
+}, '0.0.1', {requires: ['mojito', <font color="red">'read-slides',</font> 'json']});
+
+
+
+</pre>

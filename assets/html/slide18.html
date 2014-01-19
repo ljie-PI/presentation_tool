@@ -1,0 +1,50 @@
+<h3> Code example: Pass data from controller to binder </h3>
+<ul>
+    <li> Path: mojits/HeaderMojit/controller.server.js <br/>
+        <pre>
+YUI.add('HeaderMojit', function(Y, NAME) {
+    Y.namespace('mojito.controllers')[NAME] = {
+        init: function(config) {
+            this.config = config;
+        },
+        index: function(ac) {
+            ac.models.HeaderMojitModelFoo.getMenuList(ac, function (menuList) {
+                ac.assets.addCss('./index.css');
+                <font color="red">ac.instance.config.menuList = menuList;</font>
+                ac.done({
+                    defTitle: "What is Mojito?"
+                });
+            });
+        }
+    };
+}, '0.0.1', {requires: ['mojito', 'HeaderMojitModelFoo']});
+
+        </pre>
+    </li>
+    <li> Path: mojits/HeaderMojit/binders/index.js <br/>
+        <pre>
+YUI.add('HeaderMojitBinderIndex', function(Y, NAME) {
+    Y.namespace('mojito.binders')[NAME] = {
+        init: function (mojitProxy) {
+            this.mojitProxy = mojitProxy;
+        },
+        bind: function (node) {
+            this.node = node;
+            var me = this;
+            me.slideIdx = 1;
+            <font color="red">me.menuList = me.mojitProxy.config.menuList;</font>
+           ......
+        },
+       ......
+    };
+}, '0.0.1', {requires: ['event-mouseenter',
+                        'mojito-client',
+                        'node',
+                        'keyboard-action',
+                        'event-key']});
+
+
+
+        </pre>
+    </li>
+</ul>

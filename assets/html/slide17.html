@@ -1,0 +1,67 @@
+<h3> Code example: Pass data between mojits </h3>
+<ul>
+    <li> Path: mojits/HeaderMojit/binders/index.js <br/>
+        <pre>
+YUI.add('HeaderMojitBinderIndex', function(Y, NAME) {
+    Y.namespace('mojito.binders')[NAME] = {
+        init: function (mojitProxy) {
+            this.mojitProxy = mojitProxy;
+        },
+        bind: function (node) {
+            ......
+        },
+        ......
+        itemNodeSelect: function (e) {
+            var me = this,
+                targetNode = e.target,
+                menuListDiv = targetNode.ancestor("ul"),
+                slideIdx;
+            Y.one("#slide-title").setHTML(targetNode.getHTML());
+            menuListDiv.setStyle("display", "none");
+            slideIdx = parseInt(menuListDiv.all("li").indexOf(targetNode)) + 1;
+            me.slideIdx = slideIdx;
+            me.node.keyaction.setSlideIdx(me.slideIdx);
+            <font color="red">
+            me.mojitProxy.broadcast('slidechange', {slideIdx: slideIdx});
+            </font>
+        },
+        ......
+}, '0.0.1', {requires: ['event-mouseenter',
+                        'mojito-client',
+                        'node',
+                        'keyboard-action',
+                        'event-key']});
+
+        </pre>
+    </li>
+    <li> Path: mojits/ContentMojit/binders/index.js <br/>
+        <pre>
+YUI.add('ContentMojitBinderIndex', function(Y, NAME) {
+    Y.namespace('mojito.binders')[NAME] = {
+        init: function (mojitProxy) {
+            this.mojitProxy = mojitProxy;
+        },
+
+        bind: function (node) {
+            var me = this;
+            this.node = node;
+            me.loadSlide(1);
+            <font color="red">
+            me.mojitProxy.listen("slidechange", function(e) {
+                var slideIdx = e.data.slideIdx;
+                me.loadSlide(slideIdx);
+            });
+            </font>
+        },
+        loadSlide: function (n) {
+           ......
+        }
+    };
+
+}, '0.0.1', {requires: ['event-mouseenter', 'mojito-client']});
+
+
+
+        </pe>
+    </li>
+</ul>

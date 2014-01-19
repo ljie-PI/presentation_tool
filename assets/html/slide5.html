@@ -1,0 +1,56 @@
+<h3> Code example: Model </h3>
+<strong> Path: mojits/HeaderMojit/models/foo.server.js </strong>
+<pre>
+YUI.add('HeaderMojitModelFoo', function(Y, NAME) {
+    Y.namespace('mojito.models')[NAME] = {
+        
+        init: function(config) {
+            this.config = config;
+        },
+
+        getMenuList: function (ac, callback) {
+            var me = this,
+            fs = require('fs'),
+            basePath = "assets/html/",
+            slideSeqRegex = /slide(\d*)\.html/,
+            titleRegex = /&lt;h3&gt;(.*?)/&lt;\/h3&gt;/;
+            me.menuList = [];
+            fs.readdir(basePath, function (err, files) {
+                var fileCount = files.length;
+                Y.log("Files in " + basePath + "are :" + Y.JSON.stringify(files));
+                files.forEach(function (item) {
+                    Y.log("Get title from file " + item);
+                    var slideSeqExec = slideSeqRegex.exec(item),
+                    slideSeq,
+                    titleExec,
+                    title,
+                    readStream,
+                    readBuf = "";
+                    if (slideSeqExec) {
+                        slideSeq = parseInt(slideSeqExec[1]) - 1;
+                    }
+                    readStream = fs.createReadStream(basePath + item);
+                    readStream.on("data", function (data) {
+                        readBuf += data;
+                        titleExec = titleRegex.exec(readBuf);
+                        if (titleExec) {
+                            title = titleExec[1];
+                        }
+                    }).on("error", function (err) {
+                        title = "No title";
+                        me.menuList[slideSeq] = title;
+                        me.checkFinish(fileCount, callback);
+                    }).on("end", function () {
+                        me.menuList[slideSeq] = title;
+                        me.checkFinish(fileCount, callback);
+                    });
+                })
+            });
+            
+        }
+    };
+}, '0.0.1', {requires: ['json']});
+
+
+
+</pre>

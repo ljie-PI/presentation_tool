@@ -1,0 +1,23 @@
+<h3> Mojito Applications Directory Structure</h3>
+<ul>
+    <li> addons - directory containing additional addons for Mojito. </li>
+    <li> autoload(yui_modules) - directory of JavaScript files that contain YUI modules added with YUI.add. These files are automatically included if required by a YUI module. </li>
+    <li> assets - general directory containing CSS files for all mojits. </li>
+    <li> application.json - application configuration file that lets you specify the port and the mojits used by the application. </li>
+    <li> routes.json - configuration file for mapping routing paths to actions. </li>
+    <li> server.js - file providing integration with a cloud-based environment where Mojito applications can run. </li>
+    <li> package.json - configuration file for deploying the application. </li>
+    <li> 
+        mojits - directory storing the mojits. See Mojit Files and Directories for a description of the directory contents.
+        <ul>
+            <li> actions - directory of JavaScript files containing methods to add to the controller. Actions are useful for maintaining large controllers. </li>
+            <li> assets - directory for storing CSS or JavaScript files. </li>
+            <li> autoload(yui_modules) - directory containing JavaScript files that contain YUI modules added with YUI.add. </li>
+            <li> binders - directory containing event binding files for the mojit. </li>
+            <li> controller.server.js - the mojit controller that runs on the server. You can also create the file </li>
+            <li> models - directory containing the model scripts. </li>
+            <li> views - directory containing the templates. </li>
+            <li> tests - directory containing the controller, model, and YUI module unit tests. The structure of tests mirrors its parent mojit’s directory structure. </li>
+        </ul>
+    </li>
+</ul>
